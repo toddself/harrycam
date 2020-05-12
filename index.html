@@ -2,9 +2,14 @@
 <html>
   <head><title>harry cam</title></head>
   <body>
-    <button id="start">start</button>
-    <button id="stop" disabled>stop</button><br>
-    <video id="preview" width="720" height="540" autoplay muted></video>
+    <div style="float: left; padding: 5px;">
+      <video id="preview" width="720" height="540" style="border: 1px solid black;" autoplay muted></video>
+    </div>
+    <div style="float: left; padding: 5px;">
+      <h1>Harry Cam!</h1>
+      <button id="start">start</button><br>
+      <button id="stop" disabled>stop</button>
+    </div>
     <script>
       const preview = document.querySelector('#preview')
       const start = document.querySelector('#start')
@@ -22,6 +27,7 @@
       })
 
       stop.addEventListener('click', async (evt) => {
+        evt.preventDefault()
         stop.disabled = true
         start.disabled = false
         preview.srcObject = null
