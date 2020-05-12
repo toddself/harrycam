@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head><title>harry cam</title></head>
+  <body>
+    <button id="start">start</button>
+    <button id="stop" disabled>stop</button><br>
+    <video id="preview" width="720" height="540" autoplay muted></video>
+    <script>
+      const preview = document.querySelector('#preview')
+      const start = document.querySelector('#start')
+      const stop = document.querySelector('#stop')
+      let video 
+
+      start.addEventListener('click', async (evt) => {
+        evt.preventDefault()
+        stop.disabled = false
+        start.disabled = true
+        video = await navigator.mediaDevices.getUserMedia({
+          video: true
+        })
+        preview.srcObject = video
+      })
+
+      stop.addEventListener('click', async (evt) => {
+        stop.disabled = true
+        start.disabled = false
+        preview.srcObject = null
+        video.getTracks().forEach((track) => track.stop())
+      })
+    </script>
+  </body>
+</html>
